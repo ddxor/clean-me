@@ -1,17 +1,22 @@
-# Clean Me Exercise
+# Facts/Assumptions
 
-Please take a look at clean-me.php
+* I have only focused on the User part of the code
+* Rather than trying to write something complete I have tried to write something that demonstrates my approach
+* We want to use a Domain Driven Development methodology
+* We want to build to tests - I.e. TDD
+* Our architecture should be eventually formed in the following fashion: Presentation->Application->Domain->Infrastructure
+* I'm not using any framework or libraries (as requested)
+* This could, say, eventually form part of a User management microservice?
+* We're using the PSR-2 code standard
+* Written for PHP 7.0
 
-We'd like you to spend some time going through this code and refactoring it. The code is functional, but can definietely be improved upon. 
+# Todo
 
-To complete the exercise, please fork this repository and work in your fork. Once you've completed your rework create a Pull Request back to this repository so we can view the diff.   
+* Create new domain model for property
+* Create user <-> property relation
+* Add code, tests & infrastructure to query against a datastore
+* Define functional tests
 
-You are at liberty to do as much refactoring as you see fit, we only ask that you don't include any frameworks or dependancies via composer. That would make the diff unreadable, but feel free to assume there is one present, just make sure you note that in the comments. 
+# Testing
 
-There are one or two bugs in the code, but we would ask you to consider how it could be improved structurally: Can it be more modular? How could it better adhere to SOLID principles? Is stuff in the right place? Is it maintainable and easy to understand? What about design patterns?
- 
-Clue: You’ll probably need to refactor the code into a number of new files to do well in this test. We think a couple of hours would be a rough guide to how long it should take… and that includes some thinking time.
- 
-
-
-Good luck!
+* Run phpunit from the root directory
