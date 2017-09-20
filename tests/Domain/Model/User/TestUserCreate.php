@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use PHPUnit\Framework\TestCase;
 use App\Domain\Model\User;
 use App\Domain\Model\User\Id as UserId;
@@ -13,7 +15,7 @@ final class TestUserCreate extends TestCase
 			User::class,
 			(new User(
 				new UserId(rand(0, 50)),
-				new UserName('James', 'Anslow'),
+				new UserName('Mr', 'James', 'Anslow'),
 				$acceptsPets = true
 			))
 		);
@@ -25,7 +27,18 @@ final class TestUserCreate extends TestCase
 		
 		(new User(
 			'15',
-			new UserName('James', 'Anslow'),
+			new UserName('Mr', 'James', 'Anslow'),
+			$acceptsPets = true
+		));
+	}
+	
+	public function testCantBeCreatedWithInvalidPrefix()
+	{
+		$this->expectException(UnexpectedValueException::class);
+		
+		(new User(
+			new UserId(rand(0, 50)),
+			new UserName('Ten', 'James', 'Anslow'),
 			$acceptsPets = true
 		));
 	}
@@ -36,7 +49,7 @@ final class TestUserCreate extends TestCase
 		
 		(new User(
 			new UserId(rand(0, 50)),
-			'James Anslow',
+			15,
 			$acceptsPets = true
 		));
 	}
@@ -47,7 +60,7 @@ final class TestUserCreate extends TestCase
 		
 		(new User(
 			new UserId(rand(0, 50)),
-			new UserName('James', 'Anslow'),
+			new UserName('Mr', 'James', 'Anslow'),
 			$acceptsPets = 15
 		));
 	}

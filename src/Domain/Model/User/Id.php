@@ -27,7 +27,7 @@ class Id
 	public function set($id)
 	{
 		if (!is_int($id)) {
-			throw new \InvalidArgumentException('1st parameter must be of type int. ' . gettype($id) . ' given.');
+			throw new \InvalidArgumentException('1st parameter must be of type integer. ' . gettype($id) . ' given.');
 		}
 		
 		$this->id = $id;

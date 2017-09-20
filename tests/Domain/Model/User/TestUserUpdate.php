@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use PHPUnit\Framework\TestCase;
 use App\Domain\Model\User;
 use App\Domain\Model\User\Id as UserId;
@@ -11,7 +13,7 @@ final class TestUserUpdate extends TestCase
 	{
 		$user = new User(
 			new UserId(rand(0, 50)),
-			new UserName('James', 'Anslow'),
+			new UserName('Mr', 'James', 'Anslow'),
 			$acceptsPets = true
 		);
 		
@@ -26,20 +28,20 @@ final class TestUserUpdate extends TestCase
 	{
 		$user = new User(
 			new UserId(rand(0, 50)),
-			new UserName('James', 'Anslow'),
+			new UserName('Mr', 'James', 'Anslow'),
 			$acceptsPets = true
 		);
 		
-		$user->setName(new UserName('John', 'Doe'));
+		$user->setName(new UserName('Mr', 'John', 'Doe'));
 		
-		$this->assertEquals($user->getName(), 'John Doe');
+		$this->assertEquals($user->getName(), 'Mr John Doe');
 	}
 	
 	public function testUpdateAcceptsPetsWithValidValue()
 	{
 		$user = new User(
 			new UserId(rand(0, 50)),
-			new UserName('James', 'Anslow'),
+			new UserName('Mr', 'James', 'Anslow'),
 			$acceptsPets = true
 		);
 		
@@ -48,13 +50,28 @@ final class TestUserUpdate extends TestCase
 		$this->assertEquals($user->getAcceptsPets(), false);
 	}
 	
+	public function testCantInstantiateNameWithInvalidPrefix()
+	{
+		$this->expectException(InvalidArgumentException::class);
+		
+		$user = new User(
+			new UserId(rand(0, 50)),
+			new UserName('Mr', 'James', 'Anslow'),
+			$acceptsPets = true
+		);
+		
+		$user->setName(
+			new UserName(5, 'James', 'Anslow')
+		);
+	}
+	
 	public function testCantUpdateIdWithInvalidValue()
 	{
 		$this->expectException(TypeError::class);
 		
 		$user = new User(
 			new UserId(rand(0, 50)),
-			new UserName('James', 'Anslow'),
+			new UserName('Mr', 'James', 'Anslow'),
 			$acceptsPets = true
 		);
 		
@@ -67,7 +84,7 @@ final class TestUserUpdate extends TestCase
 		
 		$user = new User(
 			new UserId(rand(0, 50)),
-			new UserName('James', 'Anslow'),
+			new UserName('Mr', 'James', 'Anslow'),
 			$acceptsPets = true
 		);
 		
@@ -80,7 +97,7 @@ final class TestUserUpdate extends TestCase
 		
 		$user = new User(
 			new UserId(rand(0, 50)),
-			new UserName('James', 'Anslow'),
+			new UserName('Mr', 'James', 'Anslow'),
 			$acceptsPets = true
 		);
 		
